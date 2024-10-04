@@ -1,8 +1,8 @@
 package com.example.proyectodawii.serviceimplement;
 
-import com.example.proyectodawii.model.tipo_animal;
-import com.example.proyectodawii.repository.Tipo_AnimalRepository;
-import com.example.proyectodawii.service.TipoAnimalService;
+import com.example.proyectodawii.model.Tipo;
+import com.example.proyectodawii.repository.TipoRepository;
+import com.example.proyectodawii.service.TipoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,16 +11,16 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
-public class TipoAnimalServiceImplement implements TipoAnimalService {
+public class TipoServiceImplement implements TipoService {
 
     @Autowired
-    private Tipo_AnimalRepository dao;
+    private TipoRepository dao;
 
 
     @Override
     public ResponseEntity<Map<String, Object>> listarTipoAnimal() {
         Map<String,Object> respuesta = new HashMap<>();
-        List<tipo_animal> tipo_animales = dao.findAll();
+        List<Tipo> tipo_animales = dao.findAll();
 
         if(!tipo_animales.isEmpty())
         {
@@ -42,11 +42,11 @@ public class TipoAnimalServiceImplement implements TipoAnimalService {
     @Override
     public ResponseEntity<Map<String, Object>> listarTipoanimalPorId(Long id) {
         Map<String,Object> respuesta = new HashMap<>();
-        Optional<tipo_animal> tipo_animal = dao.findById(id);
+        Optional<Tipo> tipo_animal = dao.findById(id);
 
         if(tipo_animal.isPresent())
         {
-            respuesta.put("tipo_animal","Lista de Tipos de Animales");
+            respuesta.put("tipo",tipo_animal);
             respuesta.put("mensaje","Busqueda Corrrecta");
             respuesta.put("status", HttpStatus.OK);
             respuesta.put("fecha", new Date());
@@ -63,7 +63,7 @@ public class TipoAnimalServiceImplement implements TipoAnimalService {
     }
 
     @Override
-    public ResponseEntity<Map<String, Object>> agregarTipoAnimal(tipo_animal tipoAnimal) {
+    public ResponseEntity<Map<String, Object>> agregarTipoAnimal(Tipo tipoAnimal) {
         Map<String,Object> respuesta =  new HashMap<>();
         dao.save(tipoAnimal);
         respuesta.put("tipoAnimal", tipoAnimal);
@@ -74,12 +74,12 @@ public class TipoAnimalServiceImplement implements TipoAnimalService {
     }
 
     @Override
-    public ResponseEntity<Map<String, Object>> editarTipoAnimal(tipo_animal tipoA, Long id) {
+    public ResponseEntity<Map<String, Object>> editarTipoAnimal(Tipo tipoA, Long id) {
         Map<String,Object> respuesta =  new HashMap<>();
-        Optional<tipo_animal> tipoAnimalExiste = dao.findById(id);
+        Optional<Tipo> tipoAnimalExiste = dao.findById(id);
         if (tipoAnimalExiste.isPresent())
         {
-            tipo_animal tipoAnimal = tipoAnimalExiste.get();
+            Tipo tipoAnimal = tipoAnimalExiste.get();
             tipoAnimal.setDescripcion(tipoA.getDescripcion());
             tipoAnimal.setEstado(tipoA.getEstado());
             dao.save(tipoAnimal);
@@ -101,10 +101,10 @@ public class TipoAnimalServiceImplement implements TipoAnimalService {
     @Override
     public ResponseEntity<Map<String, Object>> eliminarTipoAnimal(Long id) {
         Map<String,Object> respuesta =  new HashMap<>();
-        Optional<tipo_animal> tipoAnimalExiste = dao.findById(id);
+        Optional<Tipo> tipoAnimalExiste = dao.findById(id);
         if(tipoAnimalExiste.isPresent())
         {
-            tipo_animal tipoAnimal = tipoAnimalExiste.get();
+            Tipo tipoAnimal = tipoAnimalExiste.get();
             dao.delete(tipoAnimal);
             respuesta.put("mensaje", "Eliminado correctamente");
             respuesta.put("status", HttpStatus.NO_CONTENT);
@@ -124,10 +124,10 @@ public class TipoAnimalServiceImplement implements TipoAnimalService {
     @Override
     public ResponseEntity<Map<String, Object>> eliminarTipoAnimalEstado(Long id) {
         Map<String,Object> respuesta = new HashMap<>();
-        Optional<tipo_animal> tipoAnimalExiste = dao.findById(id);
+        Optional<Tipo> tipoAnimalExiste = dao.findById(id);
         if(tipoAnimalExiste.isPresent())
         {
-            tipo_animal tipoAnimal = tipoAnimalExiste.get();
+            Tipo tipoAnimal = tipoAnimalExiste.get();
             tipoAnimal.setEstado("E");
             dao.save(tipoAnimal);
             respuesta.put("mensaje", "Se eliminado correctamente");
@@ -144,24 +144,5 @@ public class TipoAnimalServiceImplement implements TipoAnimalService {
         }
     }
 
-    @Override
-    public ResponseEntity<Map<String, Object>> allTipoAnimalEstado() {
-        Map<String,Object> respuesta = new HashMap<>();
-       List<tipo_animal> tipoAnimales= dao.findAllByEstado("A");
-       if(!tipoAnimales.isEmpty())
-       {
-           respuesta.put("mensaje", "Lista de tipo de animales");
-           respuesta.put("productos", tipoAnimales);
-           respuesta.put("status", HttpStatus.OK);
-           respuesta.put("fecha", new Date());
-           return ResponseEntity.status(HttpStatus.OK).body(respuesta);
-       }
-       else
-       {
-           respuesta.put("mensaje", "No existen registros");
-           respuesta.put("status", HttpStatus.NOT_FOUND);
-           respuesta.put("fecha", new Date());
-           return ResponseEntity.status(HttpStatus.NOT_FOUND).body(respuesta);
-       }
-    }
+
 }

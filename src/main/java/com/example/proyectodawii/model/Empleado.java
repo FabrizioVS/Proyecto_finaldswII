@@ -3,7 +3,6 @@ package com.example.proyectodawii.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import net.bytebuddy.dynamic.loading.InjectionClassLoader;
 
 import javax.persistence.*;
 
@@ -40,8 +39,8 @@ public class Empleado {
 
     private String estado;
 
-    @OneToOne
-    @JoinColumn(name = "id_tipo_animal")
-    private tipo_animal tipoAnimal;
+    @ManyToOne
+    @JoinColumn(name = "id_tipo")
+    private Tipo tipo;
 
 }

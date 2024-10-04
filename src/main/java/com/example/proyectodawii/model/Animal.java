@@ -29,11 +29,9 @@ public class Animal {
 
     private String estado;
 
-    @ManyToOne
-    @JoinColumn(name = "id_tipo_animal")
-    private tipo_animal tipo_animal;
+    private int cantCuidadores;
 
-    @OneToOne
-    @JoinColumn(name = "id_ani_cuidador")
-    private animal_cuidador animal_cuidador;
+    @ManyToOne
+    @JoinColumn(name = "id_tipo")
+    private Tipo tipos;
 }

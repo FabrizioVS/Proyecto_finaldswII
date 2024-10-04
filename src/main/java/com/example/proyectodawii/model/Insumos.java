@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Data
 @Entity
@@ -23,7 +22,7 @@ public class Insumos {
 
     private String estado;
 
-    @OneToOne
-    @JoinColumn(name = "id_tipo_animal")
-    private tipo_animal tipoAnimal;
+    @ManyToOne
+    @JoinColumn(name = "id_tipo")
+    private Tipo tipo;
 }

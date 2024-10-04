@@ -44,8 +44,8 @@ public class InsumoServiceImplement implements InsumoService {
 
         if(insumoExiste.isPresent())
         {
-            respuesta.put("mensaje","Lista de Insumos");
-            respuesta.put("insumos", "Busqueda Corrrecta");
+            respuesta.put("insumos",insumoExiste);
+            respuesta.put("mensaje", "Busqueda Corrrecta");
             respuesta.put("status", HttpStatus.OK);
             respuesta.put("fecha", new Date());
             return ResponseEntity.ok().body(respuesta);
@@ -81,7 +81,6 @@ public class InsumoServiceImplement implements InsumoService {
             insumo.setNombre(ins.getNombre());
             insumo.setNombre(ins.getNombre());
             insumo.setEstado(ins.getEstado());
-            insumo.setTipoAnimal(ins.getTipoAnimal());
             dao.save(insumo);
             respuesta.put("insumo", insumo);
             respuesta.put("mensaje", "Datos del tipo de insumo modificado");

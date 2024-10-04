@@ -1,7 +1,6 @@
 package com.example.proyectodawii.service;
 
 import com.example.proyectodawii.model.Insumos;
-import com.example.proyectodawii.model.tipo_animal;
 import org.springframework.http.ResponseEntity;
 
 import java.util.Map;
