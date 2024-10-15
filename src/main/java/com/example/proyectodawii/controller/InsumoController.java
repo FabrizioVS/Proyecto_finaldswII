@@ -30,6 +30,11 @@ public class InsumoController {
         return service.listarInusmoPorId(id);
     }
 
+    @GetMapping("/tipo/{idTipo}")
+    public ResponseEntity<Map<String, Object>> listarInsumoPorIdTipo(@PathVariable Long idTipo) {
+        return service.listarPorIdTipo(idTipo);
+    }
+
     @PostMapping
     public ResponseEntity<Map<String, Object>> agregarInsumo(@RequestBody Insumos insumo)
     {

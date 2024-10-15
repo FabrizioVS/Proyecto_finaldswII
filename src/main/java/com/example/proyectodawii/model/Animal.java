@@ -33,5 +33,5 @@ public class Animal {
 
     @ManyToOne
     @JoinColumn(name = "id_tipo")
-    private Tipo tipos;
+    private Tipo tipo;
 }

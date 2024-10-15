@@ -1,5 +1,6 @@
 package com.example.proyectodawii.serviceimplement;
 
+import com.example.proyectodawii.model.Animal;
 import com.example.proyectodawii.model.Insumos;
 import com.example.proyectodawii.repository.InsumoRepository;
 import com.example.proyectodawii.service.InsumoService;
@@ -141,6 +142,27 @@ public class InsumoServiceImplement implements InsumoService {
             respuesta.put("fecha", new Date());
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(respuesta);
         }
+
+    }
+
+    @Override
+    public ResponseEntity<Map<String, Object>> listarPorIdTipo(Long idTipo) {
+        Map<String,Object> respuesta =  new HashMap<>();
+        List<Insumos> ani = dao.findByTipo_Id(idTipo);
+
+        if (!ani.isEmpty()) {
+            respuesta.put("animales", ani);
+            respuesta.put("mensaje", "Insumos encontrados");
+            respuesta.put("status", HttpStatus.OK);
+            respuesta.put("fecha", new Date());
+            return ResponseEntity.ok(respuesta);
+        } else {
+            respuesta.put("mensaje", "No se encontraron Insumos para el tipo ID: " + idTipo);
+            respuesta.put("status", HttpStatus.NOT_FOUND);
+            respuesta.put("fecha", new Date());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(respuesta);
+        }
+
 
     }
 

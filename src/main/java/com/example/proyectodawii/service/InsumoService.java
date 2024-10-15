@@ -19,6 +19,8 @@ public interface InsumoService {
 
     public ResponseEntity<Map<String, Object>> eliminarInusmoEstado(Long id);
 
+    public ResponseEntity<Map<String, Object>> listarPorIdTipo(Long idTipo);
+
     public ResponseEntity<Map<String, Object>> allInusmoEstado();
 
 
