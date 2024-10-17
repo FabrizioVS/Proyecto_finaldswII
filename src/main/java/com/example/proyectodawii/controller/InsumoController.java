@@ -12,7 +12,7 @@ import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/api/insumo")
+@RequestMapping("/api/insumos")
 public class InsumoController {
     @Autowired
     private InsumoService service;

@@ -1,5 +1,6 @@
 package com.example.proyectodawii.serviceimplement;
 
+import com.example.proyectodawii.model.Insumos;
 import com.example.proyectodawii.model.Tipo;
 import com.example.proyectodawii.repository.TipoRepository;
 import com.example.proyectodawii.service.TipoService;
@@ -25,7 +26,7 @@ public class TipoServiceImplement implements TipoService {
         if(!tipo_animales.isEmpty())
         {
             respuesta.put("mensaje","Lista de Tipos de Animales");
-            respuesta.put("tipo_animal", tipo_animales);
+            respuesta.put("tipo", tipo_animales);
             respuesta.put("status", HttpStatus.OK);
             respuesta.put("fecha", new Date());
             return ResponseEntity.status(HttpStatus.OK).body(respuesta);
@@ -143,6 +144,28 @@ public class TipoServiceImplement implements TipoService {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(respuesta);
         }
     }
+
+	@Override
+	public ResponseEntity<Map<String, Object>> listarTipoAnimalPorEstado(String estado) {
+		
+	      Map<String,Object> respuesta =  new HashMap<>();
+	        List<Tipo> tipos = dao.findAllByEstado(estado);
+	        if(!tipos.isEmpty())
+	        {
+	            respuesta.put("mensaje", "Lista de insumos");
+	            respuesta.put("tipo", tipos);
+	            respuesta.put("status", HttpStatus.OK);
+	            respuesta.put("fecha", new Date());
+	            return ResponseEntity.status(HttpStatus.OK).body(respuesta);
+	        }
+	        else
+	        {
+	            respuesta.put("mensaje", "No existen registros");
+	            respuesta.put("status", HttpStatus.NOT_FOUND);
+	            respuesta.put("fecha", new Date());
+	            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(respuesta);
+	        }
+	}
 
 
 }

@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("api/empleado")
+@RequestMapping("api/empleado/")
 public class EmpleadoController {
 	@Autowired
 	private EmpleadoService serviceEmp;
@@ -28,6 +28,11 @@ public class EmpleadoController {
 	@GetMapping
 	public ResponseEntity<Map<String, Object>> listarAll() {
 		return serviceEmp.listarEmpleados();
+	}
+	
+	@GetMapping("/estado/A")
+	public ResponseEntity<Map<String, Object>> listarEstadoA(String estado) {
+		return serviceEmp.listarEmpleadosConEstadoA(estado);
 	}
 
 	@GetMapping("/{id}")

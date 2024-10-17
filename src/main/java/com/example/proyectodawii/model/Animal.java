@@ -9,7 +9,7 @@ import javax.persistence.*;
 import javax.print.attribute.standard.MediaSize;
 import java.util.List;
 
-@Data
+
 @Entity
 @Table(name = "animal")
 @AllArgsConstructor
@@ -32,6 +32,64 @@ public class Animal {
     private int cantCuidadores;
 
     @ManyToOne
-    @JoinColumn(name = "id_tipo")
+    @JoinColumn(name = "idtipo")
     private Tipo tipo;
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public int getEdad() {
+		return edad;
+	}
+
+	public void setEdad(int edad) {
+		this.edad = edad;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public int getCantCuidadores() {
+		return cantCuidadores;
+	}
+
+	public void setCantCuidadores(int cantCuidadores) {
+		this.cantCuidadores = cantCuidadores;
+	}
+
+	public Tipo getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(Tipo tipo) {
+		this.tipo = tipo;
+	}
+    
+    
 }

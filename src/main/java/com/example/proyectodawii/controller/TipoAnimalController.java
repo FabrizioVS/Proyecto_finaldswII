@@ -16,10 +16,15 @@ public class TipoAnimalController {
     @Autowired
     private TipoService service;
 
-    @GetMapping
+    @GetMapping("/todos")
     public ResponseEntity<Map<String, Object>> listar()
     {
         return service.listarTipoAnimal();
+    }
+    @GetMapping("/waa/{estado}")
+    public ResponseEntity<Map<String, Object>> listarPorEstado(@PathVariable String estado)
+    {
+        return service.listarTipoAnimalPorEstado(estado);
     }
 
     @GetMapping("/{id}")

@@ -8,6 +8,7 @@ import java.util.Map;
 public interface TipoService {
 
     public ResponseEntity<Map<String, Object>> listarTipoAnimal();
+    public ResponseEntity<Map<String, Object>> listarTipoAnimalPorEstado(String estado);
 
     public ResponseEntity<Map<String, Object>> listarTipoanimalPorId(Long id);
 
